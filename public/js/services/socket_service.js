@@ -6,7 +6,7 @@ var SocketService = function(geochat, openCallback, messageCallback) {
 
 SocketService.prototype = {
     start: function() {
-        this.socket = new WebSocket('ws://ws.example.org:5000');
+        this.socket = new WebSocket('ws://geochat-ws.herokuapp.com');
 
         var onOpen = _.bind(this.onOpen, this);
         var onMessage = _.bind(this.onMessage, this);
