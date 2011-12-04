@@ -1,5 +1,5 @@
-var SocketService = function(callback) {
-    this.onOpen = callback;
+var SocketService = function(geochat, callback) {
+    this.onOpen = _.bind(callback, geochat);
     this.start();
 };
 
