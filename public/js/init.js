@@ -1,4 +1,5 @@
 var GeoChat = function () {
+    var geochat = this;
     var start = function () {
         this.services.socket.sendObject({
             method: 'nickname',
@@ -12,20 +13,18 @@ var GeoChat = function () {
             });
         });
 
+        this.services.template = new TemplateService();
+        this.render = _.bind(this.services.template.render, this.services.template);
+
         var userListFunc = function () {
-            this.services.socket.sendObject({method: 'client_list'})
+            this.services.socket.sendObject({method: 'client_list'});
         };
-        setTimeout(_.bind(userListFunc, this), 2000)
+        setTimeout(_.bind(userListFunc, this), 1000);
     };
 
-    var Templates = {
-        user: '<li class="user" data-nickname="{{nickname}}">{{nickname}} - {{distance}}kms</li>',
-        userPendingLocation: '<li class="user" data-nickname="{{nickname}}">{{nickname}} - (pending)</li>'
-    }
     var addUser = function (element) {
         if ($('.user[data-nickname="'+element.nickname+'"]').length == 0) {
-            var template = (element.distance !== undefined ? Templates.user : Templates.userPendingLocation);
-            $('#online-users').append($(Mustache.to_html(template, element)));
+            $('#online-users').append(geochat.render('user', element));
         }
     }
 
