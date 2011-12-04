@@ -1,5 +1,6 @@
-var SocketService = function(geochat, callback) {
-    this.onOpen = _.bind(callback, geochat);
+var SocketService = function(geochat, openCallback, messageCallback) {
+    this.onOpen = _.bind(openCallback, geochat);
+    this.onMessage = _.bind(messageCallback, geochat);
     this.start();
 };
 
@@ -12,10 +13,6 @@ SocketService.prototype = {
 
         this.socket.onopen = onOpen;
         this.socket.onmessage = onMessage;
-    },
-
-    onMessage: function(message) {
-        console.log(message.data);
     },
 
     sendObject: function(object) {
