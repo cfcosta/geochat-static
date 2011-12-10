@@ -21,12 +21,12 @@ User.prototype = {
 
 var GeoChat = function() {
     var geochat = this;
-    var user = new User();
+    this.user = new User();
 
     var start = function() {
         this.services.location = new LocationService(this, function(position) {
-            user.location = [position.coords.latitude, position.coords.longitude];
-            _.bind(user.ready, user)(this.services.socket);
+            this.user.location = [position.coords.latitude, position.coords.longitude];
+            _.bind(this.user.ready, this.user)(this.services.socket);
         });
 
         this.services.template = new TemplateService();
@@ -37,8 +37,10 @@ var GeoChat = function() {
         console.log("Received Message: " + msg.data);
         var message = JSON.parse(msg.data);
         switch (message.method) {
-        case('contact-list'):
-            console.log(msg);
+        case 'contact-list':
+            var clients = _.each(message.data.clients, _.bind(function (client) {
+                this.render('user', client).appendTo('#contact-list');
+            }, this));
         }
     };
 
