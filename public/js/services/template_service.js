@@ -1,11 +1,11 @@
 var TemplateRepository = function () {};
 TemplateRepository.prototype = {
 	user: function (data) {
-		if (data.distance !== undefined) {
-			return Mustache.to_html('<li class="user" data-nickname="{{nickname}}">{{nickname}} - {{distance}}kms</li>', data);
-		} else {
-			return Mustache.to_html('<li class="user" data-nickname="{{nickname}}">{{nickname}} - (pending)</li>', data);
-		};
+		return Mustache.to_html(
+				'<li class="user" data-id="{{id}}">'+
+					'<a class="nickname" href="#">{{nickname}}</a>'+
+					'<span class="distance">{{distance}}kms</span>'+
+				'</li>', data);
 	},
 };
 
