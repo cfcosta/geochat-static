@@ -3,27 +3,67 @@
     <head>
         <title>GeoChat</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" />
+        <style type="text/css">
+            body {
+                padding-top: 40px;
+            }
+
+            .content .span4 {
+                border-right: 1px solid #eee;
+            }
+
+            .user {
+                list-style: none;
+                width: 100%;
+                padding: 10px 0;
+                clear: both;
+                height: 50px;
+            }
+
+            .picture {
+                float: left;
+                padding: 0 10px;
+            }
+
+            .nickname {
+                display: block;
+            }
+        </style>
     </head>
 
     <body>
-        <header>
-            <h1>GeoChat!</h1>
-        </header>
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <a class="brand">GeoChat!</a>
+                </div>
+            </div>
+        </div>
 
-        <section id="main">
-            <%= yield %>
-        </section>
+        <div class="container">
+            <div class="content">
+                <div class="page-header">
+                    <h1>GeoChat!</h1>
+                </div>
 
-        <footer>
-            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-            <script type="text/javascript" src="/js/libraries/mustache.js"></script>
-            <script type="text/javascript" src="/js/libraries/underscore-min.js"></script>
-            <script type="text/javascript" src="/js/services/template_service.js"></script>
-            <script type="text/javascript" src="/js/services/socket_service.js"></script>
-            <script type="text/javascript" src="/js/services/location_service.js"></script>
-            <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
-            <script type="text/javascript" src="/js/init.js"></script>
-        </footer>
+                <div class="row">
+                    <%= yield %>
+                </div>
+            </div>
+
+            <footer>
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+                <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+                <script type="text/javascript" src="/js/libraries/mustache.js"></script>
+                <script type="text/javascript" src="/js/libraries/underscore-min.js"></script>
+                <script type="text/javascript" src="/js/libraries/bootstrap-buttons.js"></script>
+                <script type="text/javascript" src="/js/services/template_service.js"></script>
+                <script type="text/javascript" src="/js/services/socket_service.js"></script>
+                <script type="text/javascript" src="/js/services/location_service.js"></script>
+                <script type="text/javascript" src="/js/init.js"></script>
+            </footer>
+        </div>
     </body>
 </html>
 

@@ -58,19 +58,26 @@ $(document).ready(function() {
         xfbml: true
     });
 
+    $('#fb-login-button').button();
     $('#fb-login-button').click(function() {
+        $(this).button('loading');
+        var button = this;
+
         FB.login(function(response) {
             if (response.session) {
                 sessionStorage.setItem("oauth-uid", response.session.uid);
                 sessionStorage.setItem("oauth-secret", response.session.secret);
                 sessionStorage.setItem("oauth-access-token", response.session.access_token);
 
-                FB.api('/me', function(response) {
+                FB.api('/me', _.bind(function(response) {
                     sessionStorage.setItem("id", response.id);
                     sessionStorage.setItem("name", [response.first_name, response.last_name].join(' '));
                     sessionStorage.setItem("link", response.link);
                     sessionStorage.setItem("picture", 'http://graph.facebook.com/' + response.id + '/picture');
-                })
+
+                    $(this).hide();
+                    $('#chat').slideDown();
+                }, button));
 
                 var geochat = new GeoChat();
             } else {
