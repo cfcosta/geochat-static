@@ -19,8 +19,11 @@ User.prototype = {
 
         $('.user').live('click', function () {
             var userId = $(this).data('id');
+            var userName = $(this).find('a.nickname').text();
+
             if($('.chat[data-to='+ userId +']').length < 1) {
                 _.bind(geochat.createChat, geochat)({ to: userId }, socketService);
+                $('.tabs').append('<li><a href="#chat-'+ userId +'">'+ userName +'</a></li>')
             }
         });
     }
@@ -72,6 +75,7 @@ var GeoChat = function() {
                 break;
             case 'private-message':
                 if($('.chat[data-to='+ message.data.from +']').length < 1) {
+                    $('.tabs').append('<li><a href="#chat-'+ message.data.from +'">'+ $('.user[data-id="'+ message.data.from +'"] > .nickname').text() +'</a></li>')
                     this.createChat({to: message.data.from});
                 }
 
@@ -126,6 +130,8 @@ $(document).ready(function() {
         cookie: true,
         xfbml: true
     });
+
+    $('.tabs').tabs();
 
     $('#fb-login-button').button();
     $('#fb-login-button').click(function() {

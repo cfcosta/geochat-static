@@ -12,7 +12,7 @@ TemplateRepository.prototype = {
 	},
 
 	chatTemplate:
-		'<li class="chat" data-to="{{to}}">'+
+		'<li class="chat tab-pane" data-to="{{to}}" id="chat-{{to}}">'+
 			'<ul class="messages">'+
 			'</ul>'+
 			'<form action="" class="messagebox" data-to="{{to}}">'+
