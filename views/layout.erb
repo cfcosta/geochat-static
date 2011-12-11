@@ -9,12 +9,16 @@
                 padding-top: 40px;
             }
 
+            ul, li {
+                margin: 0;
+                list-style: none;
+            }
+
             .content .span4 {
                 border-right: 1px solid #eee;
             }
 
             .user {
-                list-style: none;
                 width: 100%;
                 padding: 10px 0;
                 clear: both;
@@ -28,6 +32,20 @@
 
             .nickname {
                 display: block;
+            }
+
+            .mine > .sender {
+                line-height: 1.6;
+                color: #0064cd;
+            }
+
+            .their > .sender {
+                line-height: 1.6;
+                color: red;
+            }
+
+            .messagebox {
+                width: 100%;
             }
         </style>
     </head>
@@ -58,6 +76,8 @@
                 <script type="text/javascript" src="/js/libraries/mustache.js"></script>
                 <script type="text/javascript" src="/js/libraries/underscore-min.js"></script>
                 <script type="text/javascript" src="/js/libraries/bootstrap-buttons.js"></script>
+                <script type="text/javascript" src="/js/libraries/strftime-min.js"></script>
+                <script type="text/javascript" src="/js/libraries/jquery.sort.js"></script>
                 <script type="text/javascript" src="/js/services/template_service.js"></script>
                 <script type="text/javascript" src="/js/services/socket_service.js"></script>
                 <script type="text/javascript" src="/js/services/location_service.js"></script>
