@@ -75,9 +75,20 @@ var GeoChat = function() {
                 break;
             case 'private-message':
                 if($('.chat[data-to='+ message.data.from +']').length < 1) {
-                    $('.tabs').append('<li><a href="#chat-'+ message.data.from +'">'+ $('.user[data-id="'+ message.data.from +'"] > .nickname').text() +'</a></li>')
+                    var tab = $('<li id="tab-for-'+ message.data.from +'"><a href="#chat-'+ message.data.from +'">'+ $('.user[data-id="'+ message.data.from +'"] > .nickname').text() +'</a></li>');
+                    $('.tabs').append(tab);
                     this.createChat({to: message.data.from});
-                }
+                };
+
+                var tab = $('li#tab-for-'+message.data.from);
+                if (!tab.hasClass('active')) {
+                    var label = tab.find('.label');
+                    if (label.length < 1) {
+                        label = $('<span class="label">0</span>')
+                        tab.find('a').append(label);
+                    };
+                    label.text(parseInt(label.text()) + 1);
+                };
 
                 message.data.sender = "their";
                 var messages = $('.chat[data-to='+ message.data.from +']').find('.messages');
@@ -132,6 +143,9 @@ $(document).ready(function() {
     });
 
     $('.tabs').tabs();
+    $('.tabs').change(function (e) {
+        $(e.target).find('.label').remove();
+    });
 
     $('#fb-login-button').button();
     $('#fb-login-button').click(function() {
