@@ -19,7 +19,9 @@ User.prototype = {
 
         $('.user').live('click', function () {
             var userId = $(this).data('id');
-            _.bind(geochat.createChat, geochat)({ to: userId }, socketService);
+            if($('.chat[data-to='+ userId +']').length < 1) {
+                _.bind(geochat.createChat, geochat)({ to: userId }, socketService);
+            }
         });
     }
 };
@@ -54,6 +56,10 @@ var GeoChat = function() {
                 break;
             case 'connect':
                 this.render('user', message.data).appendTo('#contact-list');
+                break;
+            case 'disconnect':
+                $('.user[data-id="'+ message.data.id +'"]').remove();
+
                 break;
             case 'private-message':
                 if($('.chat[data-to='+ message.data.from +']').length < 1) {
