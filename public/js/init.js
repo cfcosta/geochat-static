@@ -55,10 +55,19 @@ var GeoChat = function() {
 
                 break;
             case 'connect':
+                if ($('.chat[data-to="'+message.data.id+'"]').length > 0) {
+                    var data = { time: new Date().strftime("%T"), name: message.data.nickname, event: "acabou de entrar"}
+                    this.render('eventMessage', data).appendTo('.chat[data-to="'+message.data.id+'"] > .messages');
+                };
                 this.render('user', message.data).appendTo('#contact-list');
                 break;
             case 'disconnect':
                 $('.user[data-id="'+ message.data.id +'"]').remove();
+
+                if ($('.chat[data-to="'+message.data.id+'"]').length > 0) {
+                    var data = { time: new Date().strftime("%T"), name: message.data.nickname, event: "acabou de sair"}
+                    this.render('eventMessage', data).appendTo('.chat[data-to="'+message.data.id+'"] > .messages');
+                };
 
                 break;
             case 'private-message':

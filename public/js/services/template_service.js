@@ -8,7 +8,6 @@ TemplateRepository.prototype = {
 		'</li>',
 
 	user: function (data) {
-		console.log(data);
 		return Mustache.to_html(this.userTemplate, data);
 	},
 
@@ -26,9 +25,18 @@ TemplateRepository.prototype = {
 		return Mustache.to_html(this.chatTemplate, data);
 	},
 
+	eventMessageTemplate:
+		'<li class="event">'+
+			'{{time}} {{name}} {{event}}.'+
+		'</li>',
+
+	eventMessage: function (data) {
+		return Mustache.to_html(this.eventMessageTemplate, data);
+	},
+
 	messageTemplate:
 		'<li class="{{sender}}">'+
-			'<span class="sender">{{time}} {{from_name}}:</span>'+
+			'<span class="sender">{{time}} {{from_name}}: </span>'+
 			'<span class="message">{{message}}</span>'+
 		'</li>',
 
